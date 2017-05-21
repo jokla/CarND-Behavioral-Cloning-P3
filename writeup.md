@@ -106,28 +106,48 @@ model.add(Dropout(0.2))
 model.add(Dense(1))
 ```
 
-
+It is similar to the NVIDIA architecture, just a little bit simpler.
 
 #### 3. Creation of the Training Set & Training Process
 
-To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
+To capture good driving behavior, I first recorded two laps on track one using center lane driving. I used a joystick since I found very difficult to control the car with mouse and keyboard. In addition, the recorded steering angles are smoother, resulting in a better result. Here is an example image of center lane driving:
 
 ![alt text][image2]
 
-I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
+At each iteration we get three pictures, coming from the right, left and center cameras. I added an offset of 0.23 and -0.23 on the steering angle relative to the right and left cameras.
+
+
+
+I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to come back to the center. These images show what a recovery looks like:
 
 ![alt text][image3]
 ![alt text][image4]
 ![alt text][image5]
 
-Then I repeated this process on track two in order to get more data points.
+Then I repeated this process by driving the car in the track in the opposite direction, in order to get more data points.
 
-To augment the data sat, I also flipped images and angles thinking that this would ... For example, here is an image that has then been flipped:
+To augment the data set, I also flipped images and angles thinking that this would help to generalize the model. For example, here is an image that has then been flipped:
 
 ![alt text][image6]
 ![alt text][image7]
 
-Etc ....
+Here the code:
+
+```python
+    # flip image (invert angle)
+    images.append(np.fliplr(image))
+    angles.append(angle * -1.0)
+```
+
+In addition I used also a random shear:
+
+
+
+```python
+	# random shear
+	images.append(random_shear(image, np.random.randint(32)))
+	angles.append(angle)
+```
 
 After the collection process, I had X number of data points. I then preprocessed this data by ...
 
