@@ -120,7 +120,9 @@ At each iteration we get three pictures, coming from the right, left and center 
 
 I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to come back to the center. These images show what a recovery looks like:
 
-<img src="./examples/rec1.jpg" alt="" />   <img src="./examples/rec2.jpg" alt="" />   <img src="./examples/rec3.jpg" alt="" />      
+<img src="./examples/rec1.jpg" alt="" />   
+<img src="./examples/rec2.jpg" alt="" />     
+<img src="./examples/rec3.jpg" alt="" />      
 
 Then I repeated this process by driving the car in the track in the opposite direction, in order to get more data points.
 
