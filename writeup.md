@@ -112,7 +112,7 @@ It is similar to the NVIDIA architecture, just a little bit simpler.
 
 To capture good driving behavior, I first recorded two laps on track one using center lane driving. I used a joystick since I found very difficult to control the car with mouse and keyboard. In addition, the recorded steering angles are smoother, resulting in a better result. Here is an example image of center lane driving:
 
-![alt text][image2]
+![alt text][./examples/center.jpg]
 
 At each iteration we get three pictures, coming from the right, left and center cameras. I added an offset of 0.23 and -0.23 on the steering angle relative to the right and left cameras.
 
@@ -120,16 +120,16 @@ At each iteration we get three pictures, coming from the right, left and center 
 
 I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to come back to the center. These images show what a recovery looks like:
 
-![alt text][image3]
-![alt text][image4]
-![alt text][image5]
+![alt text][./examples/rec1.png]
+![alt text][./examples/rec2.png]
+![alt text][./examples/rec3.png]
 
 Then I repeated this process by driving the car in the track in the opposite direction, in order to get more data points.
 
 To augment the data set, I also flipped images and angles thinking that this would help to generalize the model. For example, here is an image that has then been flipped:
 
-![alt text][image6]
-![alt text][image7]
+![alt text][./examples/center.jpg]
+![alt text][./examples/center_flip.jpg]
 
 Here the code:
 
@@ -141,17 +141,17 @@ Here the code:
 
 In addition I used also a random shear:
 
-
-
 ```python
 	# random shear
 	images.append(random_shear(image, np.random.randint(32)))
 	angles.append(angle)
 ```
 
-After the collection process, I had X number of data points. I then preprocessed this data by ...
+After the collection process, I had 22035 number of data points. The keras generator triplicate the samples to a total of 66105 samples.
 
 
 I finally randomly shuffled the data set and put 20% of the data into a validation set. 
 
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was Z as evidenced by ... I used an adam optimizer so that manually training the learning rate wasn't necessary.
+I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 4. I used an adam optimizer so that manually training the learning rate wasn't necessary.
+
+I trained the network using Keras and Tensforflow runnin on a GTX 1080.

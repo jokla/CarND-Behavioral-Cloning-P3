@@ -56,6 +56,7 @@ def generator(samples, batch_size=32):
 					# random shear
 					images.append(random_shear(image, np.random.randint(32)))
 					angles.append(angle)
+
 			# convert to np array
 			X_train = np.array(images)
 			y_train = np.array(angles)
