@@ -153,7 +153,7 @@ I finally randomly shuffled the data set and put 20% of the data into a validati
 
 I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 4. I used an adam optimizer so that manually training the learning rate wasn't necessary.
 
-I trained the network using Keras and Tensforflow runnin on a GTX 1080.
+I trained the network using Keras and Tensforflow running on a GTX 1080.
 
 ## Result video
 
