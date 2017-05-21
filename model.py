@@ -30,12 +30,14 @@ angle_offsets = [0, 0.23, -0.23]
 # Python generator to generate data for training on the fly, rather than storing everything in memory
 def generator(samples, batch_size=32):
 	num_samples = len(samples)
+	
 	while 1:
 		for offset in range(0, num_samples, batch_size):
 			batch_samples = samples[offset:offset+batch_size]
 
 			images = []
 			angles = []
+			
 			for batch_sample in batch_samples:
 
 				for i, correction in zip(range(3), angle_offsets):
@@ -45,22 +47,22 @@ def generator(samples, batch_size=32):
 					image = mpimg.imread(name)
 					angle = float(batch_sample[3]) + correction
 
-					# original image
+					#  append original image
 					images.append(image)
 					angles.append(angle)
 
-					# flip image (invert angle)
+					# data agumentation: flip image (invert angle)
 					images.append(np.fliplr(image))
 					angles.append(angle * -1.0)
 
-					# random shear
+					# data agumentation: random shear
 					images.append(random_shear(image, np.random.randint(32)))
 					angles.append(angle)
 
 			# convert to np array
 			X_train = np.array(images)
 			y_train = np.array(angles)
-			#Shuffle the data
+			# Shuffle the data
 			yield shuffle(X_train, y_train)
 
 # Define batch size and generators
@@ -90,9 +92,9 @@ model.add(Dense(1))
 # compile the model
 model.compile(loss='mse', optimizer='adam')
 
-# Train
+# Train the nerwork
 nb_epochs = 3
 model.fit_generator(train_generator, samples_per_epoch=len(train_set)*10, validation_data=validation_generator, nb_val_samples=len(validation_set), nb_epoch=nb_epochs)
 
-# save the model
+# Save the model in a file 
 model.save('model.h5')
