@@ -114,6 +114,8 @@ To capture good driving behavior, I first recorded two laps on track one using c
 
 ![alt text][./examples/center.jpg]
 
+<img src="./examples/center.jpg" alt="" />    
+
 At each iteration we get three pictures, coming from the right, left and center cameras. I added an offset of 0.23 and -0.23 on the steering angle relative to the right and left cameras.
 
 
